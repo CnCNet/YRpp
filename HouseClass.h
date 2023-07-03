@@ -170,7 +170,7 @@ public:
 	static constexpr constant_ptr<DynamicVectorClass<HouseClass*>, 0xA80228u> const Array{};
 
 	static constexpr reference<HouseClass*, 0xA83D4Cu> const CurrentPlayer{}; // House of player at this computer.
-	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};;     // House of player that is observer.
+	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};      // House of player that is observer.
 
 	//IConnectionPointContainer
 	virtual HRESULT __stdcall EnumConnectionPoints(IEnumConnectionPoints** ppEnum) R0;
