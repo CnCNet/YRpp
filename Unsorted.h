@@ -43,6 +43,9 @@ public:
 	static constexpr reference<int, 0xA8B394u> const PlayerColor{};
 	static constexpr reference<bool, 0xAC10C8u> const ObserverMode{};
 	static constexpr reference<char, 0xA8B8E0u> const ScenarioName{};
+
+	static constexpr reference<bool, 0xA8B8B4u> const EnableMPDebug{};
+	static constexpr reference<bool, 0xA8B8B5u> const DrawMPDebugStats{};
 	static constexpr reference<bool, 0xB04880u> const EnableMPSyncDebug{};
 
 	static struct Network
