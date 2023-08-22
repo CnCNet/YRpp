@@ -57,9 +57,11 @@ public:
 		static constexpr reference<int, 0xB73814u> const GameStockKeepingUnit{};
 		static constexpr reference<int, 0xA8B24Cu> const ProtocolVersion{};
 		static constexpr reference<int, 0xA8B554u> const FrameSendRate{};
+		static constexpr reference<int, 0xA8B570u> const PreCalcFrameRate{};
 		static constexpr reference<int, 0x83737Cu> const ReconnectTimeout{};
 		static constexpr reference<int, 0xA8B550u> const MaxAhead{};
 		static constexpr reference<int, 0xA8B568u> const MaxMaxAhead{};
+		static constexpr reference<int, 0xA8B56Cu> const PreCalcMaxAhead{};
 		static constexpr reference<int, 0xA8DB9Cu> const LatencyFudge{};
 		static constexpr reference<int, 0xA8B558u> const RequestedFPS{};
 
