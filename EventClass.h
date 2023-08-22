@@ -169,28 +169,31 @@ public:
 class EventClass
 {
 public:
-	static constexpr reference<const char*, 0x82091C, 47> const EventNames{};
+	static constexpr reference<const char*, 0x82091C, 47> const EventNames {};
 
-	static constexpr reference<EventList<0x80>, 0xA802C8> OutList{};
-	static constexpr reference<EventList<0x4000>, 0x8B41F8> DoList{};
+	static constexpr reference<EventList<0x80>, 0xA802C8> OutList {};
+	static constexpr reference<EventList<0x4000>, 0x8B41F8> DoList {};
 	// If the event is a MegaMission, then add it to this list
-	static constexpr reference<EventList<0x100>, 0xA83ED0> MegaMissionList{};
+	static constexpr reference<EventList<0x100>, 0xA83ED0> MegaMissionList {};
 
 	// this points to CRCs from 0x100 last frames
-	static constexpr reference<DWORD, 0xB04474, 256> const LatestFramesCRC{};
-	static constexpr reference<DWORD, 0xAC51FC> const CurrentFrameCRC{};
+	static constexpr reference<DWORD, 0xB04474, 256> const LatestFramesCRC {};
+	static constexpr reference<DWORD, 0xAC51FC> const CurrentFrameCRC {};
 
 	static bool AddEvent(const EventClass& event)
 	{
-		if (OutList->Count >= 128)
-			return false;
+		if (OutList->Count < 128)
+		{
+			OutList->List[OutList->Tail] = event;
 
-		OutList->List[OutList->Tail] = event;
+			OutList->Timings[OutList->Tail] = static_cast<int>(Imports::TimeGetTime());
+			OutList->Tail = (LOBYTE(OutList->Tail) + 1) & 127;
+			OutList->Count++;
 
-		OutList->Timings[OutList->Tail] = static_cast<int>(Imports::TimeGetTime());
+			return true;
+		}
 
-		++OutList->Count;
-		OutList->Tail = (OutList->Tail + 1) & 127;
+		return false;
 	}
 
 	// Special
@@ -248,7 +251,7 @@ public:
 	}
 
 	// Unknown_Tuple
-	explicit EventClass(int houseIndex, EventType eventType, int unknown_0, int unknown_4, int unknown_c)
+	explicit EventClass(int houseIndex, EventType eventType, int unknown_0, int unknown_4, short unknown_c)
 	{
 		JMP_THIS(0x4C6A60);
 	}
@@ -272,7 +275,7 @@ public:
 	}
 
 	// Address Change
-	explicit EventClass(int houseIndex, void*/*IPAddressClass*/ ip, char unknown_0)
+	explicit EventClass(int houseIndex, void* /*IPAddressClass*/ ip, char unknown_0)
 	{
 		JMP_THIS(0x4C6C50);
 	}
@@ -285,6 +288,8 @@ public:
 	EventClass& operator=(const EventClass& another)
 	{
 		memcpy(this, &another, sizeof(*this));
+
+		return *this;
 	}
 
 	EventType Type;
