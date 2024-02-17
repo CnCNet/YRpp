@@ -47,6 +47,7 @@ public:
 	static constexpr reference<bool, 0xA8B8B4u> const EnableMPDebug{};
 	static constexpr reference<bool, 0xA8B8B5u> const DrawMPDebugStats{};
 	static constexpr reference<bool, 0xB04880u> const EnableMPSyncDebug{};
+	static constexpr reference<byte[8], 0xA8D108u> const ChatMask {};
 
 	static struct Network
 	{
